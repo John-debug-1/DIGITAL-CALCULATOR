@@ -1,3 +1,6 @@
+***SOS ΑΥΤΟΣ Ο ΦΑΚΕΛΟΣ ΕΙΝΑΙ READ ONLY, ΜΗΝ ΓΡΑΦΕΤΑΙ ΣΤΟ MAIN***
+
+
 package com.example.calculator;
 import javafx.application.Application;
 import javafx.geometry.Insets;
