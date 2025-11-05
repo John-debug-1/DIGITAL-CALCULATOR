@@ -2,6 +2,7 @@
 **Version 1.3**
 
 package com.example.calculator;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,14 +21,18 @@ import java.math.RoundingMode;
 
 public class CalculatorApp extends Application {
 
-    // --- State ---
+    // State
     private final TextField display = new TextField("0");
-    private BigDecimal stored = null;        // αποθηκευμένος αριθμός
-    private String pendingOp = null;         // τελεστής που περιμένει (+,-,*,/)
-    private boolean startNewNumber = true;   // ξεκινάμε νέο input;
+    private BigDecimal stored = null;
+    private String pendingOp = null;
+    private boolean startNewNumber = true;
     private final MathContext MC = new MathContext(20, RoundingMode.HALF_UP);
-
-    // --- Styles (όλα τοπικά, δεν χρειάζεται .css αρχείο) ---
+    private static final String FALLBACK_VERSION = "1.3";
+    private static String appVersion() {
+        String v = CalculatorApp.class.getPackage().getImplementationVersion();
+        return (v != null) ? v : FALLBACK_VERSION + "-dev";
+    }
+    // Styles
     private static final String STYLE_DISPLAY =
             "-fx-font-size: 28; -fx-background-color: #121212; -fx-text-fill: white; " +
                     "-fx-background-radius: 12; -fx-padding: 16; -fx-border-color: #1f2a3a; -fx-border-radius: 12;";
@@ -106,12 +111,12 @@ public class CalculatorApp extends Application {
             }
         });
 
-        stage.setTitle("Calculator");
+        stage.setTitle("Calculator v" + appVersion());
         stage.setScene(scene);
         stage.show();
     }
 
-    // --- Button factory (όλα σε αυτό το αρχείο) ---
+    // Button factory
     private Button makeKey(String t) {
         Button b = new Button(t);
         b.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -129,7 +134,7 @@ public class CalculatorApp extends Application {
         return STYLE_OP; // + − × ÷
     }
 
-    // --- Controller logic (όλα εδώ) ---
+    // Controller logic
     private void onPress(String t) {
         switch (t) {
             case "0","1","2","3","4","5","6","7","8","9" -> appendDigit(t);
