@@ -1,5 +1,6 @@
-  ---ΕΒΔΟΜΑΔΙΑΙΟΙ ΣΤΟΧΟΙ---
+          ---Weekly Report---
 ## Όλα τα μέλη διμιούργησαν ένα account στο github
+
 ## Όλοι γίναμε collaborators στο main github page
 
 ## Όλα τα μέλη της ομάδας κατέβασαν τα εξής εργαλεία:
@@ -9,4 +10,7 @@
 ## Δημιουργία IntelliJ Instructions Repository το οποίο περιέχει χρήσιμες πληροφορίες σχετικά με το intelliJ
 
 ## Εξοικειωθηκάμε με το περιβάλλον του Github
-## Συνεργαστήκαμε και σχεδιάσαμε ομαδικά το Digital Calculator 
+
+## Συνεργαστήκαμε και σχεδιάσαμε ομαδικά το Digital Calculator %version Calculator 1.0.0
+
+## Αφού κάναμε testing, εντοπίσαμε λάθη και δημιουργήσαμε το %version Calculator 1.2.0 και στη συνέχεια το τελικό %version Calculator 1.3.0 το οποίο λειτουργεί κανονικά
