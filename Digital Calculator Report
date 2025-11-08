@@ -1,0 +1,33 @@
+          ---Digital Calculator Report---
+
+**Summary: 30/10 έως 6/11**
+## Όλα τα μέλη της ομάδας:
+1) Διμιούργησαν ένα account στο github
+
+2) Γίνανε collaborators στο main github page του Project
+
+3) Κατέβασαν τα εξής εργαλεία:
+*IntelliJ IDEA Community Edition Version 2025.2.4
+*Scene Builder
+*Github Desktop 
+
+
+## Δημιουργία ενός Extra Repository "IntelliJ Instructions Repository" το οποίο περιέχει χρήσιμες πληροφορίες σχετικά με το intelliJ
+
+
+## Η υλοποίησή των τεσσάρων λειτουργιών από το ηλεκτρονικό κομπουτεράκι χωρίστηκε στα μέλη της ομάδας 
+*Αφού εξοικειωθηκάμε με το περιβάλλον του Github, σχεδιάσαμε τα Digital Calculator %version Calculator 1.0.0 (Mόνο το UI)
+*Calculator %version Calculator 1.1.0 (υλοποίηση λειτουργίας πρόσθεσης)
+*Calculator %version Calculator 1.2.0 (αφαίρεσης)
+*Calculator %version Calculator 1.3.0 (πολλαπλασιασμός)
+*Calculator %version Calculator 1.4.0 (διαίρεσης)
+*Αφού έγινε testing, εντοπίστηκαν λάθη και δημιουργήσαμε το διορθωμένο τελικό %version Calculator 1.4.1 το οποίο λειτουργεί κανονικά
+
+
+
+**Summary: 6/11 έως 13/11**
+## Υλοποίηση αναβάθμισης του Digital Calculator
+1) Προσθήκη μυνήματος όταν ο χρήστης πραγματοποιεί διαίρεση με το μηδέν %version Calculator 1.6.0
+*Διορθωμένη Version  %version Calculator 1.6.1
+
+2) Προσθήκη............ %version Calculator 1.7.0
