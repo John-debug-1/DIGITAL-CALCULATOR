@@ -1,0 +1,89 @@
+           switch (t) {
+                case "+" , "-" , "*" , "/" , "^" , "u-" -> {
+                    while (!ops.isEmpty()) {
+                        String top = ops.peek();
+                        if (top.equals("(")) break;
+                        int pTop = prec(top), pCur = prec(t);
+                        if (pTop > pCur || (pTop == pCur && !rightAssoc(t))) {
+                            out.add(ops.pop());
+                        } else break;
+                    }
+                    ops.push(t);
+                }
+                case "(" -> ops.push(t);
+                case ")" -> {
+                    while (!ops.isEmpty() && !ops.peek().equals("(")) {
+                        out.add(ops.pop());
+                    }
+                    if (ops.isEmpty() || !ops.peek().equals("(")) {
+                        throw new IllegalArgumentException("Unbalanced ')'");
+                    }
+                    ops.pop();
+                }
+                default -> {
+                    out.add(t);
+                }
+            }
+        }
+        while (!ops.isEmpty()) {
+            String op = ops.pop();
+            if (op.equals("(") || op.equals(")"))
+                throw new IllegalArgumentException("Unbalanced '('");
+            out.add(op);
+        }
+        return out;
+    }
+    /**
+     * Υπολογίζει δύναμη x^y:
+     */
+    private BigDecimal pow(BigDecimal base, BigDecimal exp) {
+        try {
+            if (exp.stripTrailingZeros().scale() <= 0) {
+                int n = exp.intValue();
+                if (n >= 0) return base.pow(n, MC);
+                BigDecimal p = base.pow(-n, MC);
+                if (p.compareTo(BigDecimal.ZERO)==0)
+                    throw new ArithmeticException("division by zero");
+                return BigDecimal.ONE.divide(p, MC);
+            } else {
+                double r = Math.pow(base.doubleValue(), exp.doubleValue());
+                if (Double.isNaN(r) || Double.isInfinite(r))
+                    throw new ArithmeticException("invalid pow");
+                return BigDecimal.valueOf(r);
+            }
+        } catch (ArithmeticException ex) { throw ex; }
+        catch (Exception ex) { throw new ArithmeticException("invalid pow"); }
+    }
+
+    /**
+     * Λειτουργία πράξεων
+     */
+    private BigDecimal evalRPN(List<String> rpn) {
+        Deque<BigDecimal> st = new ArrayDeque<>();
+        for (String t : rpn) {
+            switch (t) {
+                case "+" -> st.push(st.pop().add(st.pop(), MC));          // a+b
+                case "-" -> {
+                    BigDecimal b = st.pop(), a = st.pop();                // a-b
+                    st.push(a.subtract(b, MC));
+                }
+                case "*" -> st.push(st.pop().multiply(st.pop(), MC));     // a*b
+                case "/" -> {
+                    BigDecimal b = st.pop(), a = st.pop();                // a/b
+                    if (b.compareTo(BigDecimal.ZERO)==0)                  // Έλεγχος διαίρεσης με μηδέν
+                        throw new ArithmeticException("division by zero");
+                    st.push(a.divide(b, MC));
+                }
+                case "^" -> {
+                    BigDecimal b = st.pop(), a = st.pop();                // a^b
+                    st.push(pow(a, b));
+                }
+                case "u-" -> st.push(st.pop().negate());
+                default -> st.push(new BigDecimal(t));
+            }
+        }
+        if (st.size()!=1)
+            throw new IllegalArgumentException("Bad expression");
+        return st.pop();                                                 // Επιστρέφει το τελικό αποτέλεσμα
+    }
+}
