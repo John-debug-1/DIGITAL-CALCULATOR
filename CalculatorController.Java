@@ -118,3 +118,51 @@ public class CalculatorController {
         if ("Error".equals(t) || t.isEmpty()) return;
         setDisplay(t + ")");
     }
+
+  /**
+     +/- → αλλάζει πρόσημο.
+     */
+    @FXML private void onToggleSign() {
+        String t = getDisplay();
+        if ("Error".equals(t) || t.isEmpty() || t.equals("0")) {
+            setDisplay("-");
+            return;
+        }
+        try {
+            BigDecimal val = new BigDecimal(t);
+            show(val.negate());
+            return;
+        } catch (Exception ignore) { /* not a pure number */ }
+
+        int end = t.length()-1;
+        while (end>=0 && Character.isWhitespace(t.charAt(end))) end--;
+        if (end<0 || isOpChar(t.charAt(end)) || t.charAt(end)=='(') {
+            setDisplay(t + "-");
+            return;
+        }
+        int start = end;
+        while (start>=0 && (Character.isDigit(t.charAt(start)) || t.charAt(start)=='.')) start--;
+        start++;
+        if (start<=end) {
+            String num = t.substring(start, end+1);
+            if (start>0 && t.charAt(start-1)=='-' &&
+                    (start-1==0 || t.charAt(start-2)=='(' || isOpChar(t.charAt(start-2)))) {
+                setDisplay(t.substring(0, start-1) + t.substring(start));
+            } else {
+                String replaced = t.substring(0, start) + "(0-" + num + ")" + t.substring(end+1);
+                setDisplay(replaced);
+            }
+        }
+    }
+
+    /** Backspace -> αφαιρεί τον τελευταίο χαρακτήρα του input στην οθόνη (ή επιστρέφει σε "0"). */
+    @FXML private void onBackspace() {
+        String t = getDisplay();
+        if (t == null || t.equals("Error") || t.isEmpty()) {
+            setDisplay("0");
+            return;
+        }
+        t = t.substring(0, t.length()-1);
+        if (t.isEmpty()) t = "0";
+        setDisplay(t);
+    }
