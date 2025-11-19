@@ -166,3 +166,57 @@ public class CalculatorController {
         if (t.isEmpty()) t = "0";
         setDisplay(t);
     }
+
+    @FXML private void onClear() { setDisplay("0"); }
+
+    /**
+     * Εμφανίζει αποτέλεσμα
+     * Εμφανίζει μήνυμα Εrror
+     */
+    @FXML private void onEquals() {
+        String expr = getDisplay();
+        try {
+            BigDecimal result = evaluate(expr);
+            show(result);
+        } catch (ArithmeticException ae) {
+            if (ae.getMessage()!=null && ae.getMessage().toLowerCase().contains("zero")) {
+                showErrorAlert("Σφάλμα: Διαίρεση με μηδέν δεν επιτρέπεται.");
+            } else {
+                showErrorAlert("Μαθηματικό σφάλμα στην έκφραση.");
+            }
+        } catch (Exception ex) {
+            showErrorAlert("Μη έγκυρη έκφραση.");
+        }
+    }
+
+    // ---------------- Μνήμη ----------------
+
+    /**
+     * M+ : προσθέτει στην μνήμη την τιμή της οθόνης.
+     */
+    @FXML private void onMPlus() {
+        String t = getDisplay();
+        BigDecimal add;
+        try {
+            add = new BigDecimal(t);
+        } catch (Exception e) {
+            try { add = evaluate(t); }
+            catch (Exception ex) { return; }
+        }
+        mem = mem.add(add, MC);
+        updateMemLabel();
+    }
+
+    /** M- : καθαρίζει τη μνήμη (μηδενισμός). */
+    @FXML private void onMC() {
+        mem = BigDecimal.ZERO;
+        updateMemLabel();
+    }
+
+    // ----------------Λειτουργία OFF ----------------
+
+    /** OFF : κλείνει το κύριο παράθυρο (Stage). */
+    @FXML private void onOff() {
+        Stage st = (Stage) display.getScene().getWindow();
+        st.close();
+    }
