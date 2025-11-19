@@ -1,8 +1,7 @@
 # Security Policy
 
 ## Supported Versions
-
-*Digital Calculator
+*Digital Calculator App*
 
 | Version | Supported          |
 | ------- | ------------------ |
