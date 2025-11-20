@@ -156,7 +156,10 @@ public class CalculatorController {
         }
     }
 
-    /** Backspace -> αφαιρεί τον τελευταίο χαρακτήρα του input στην οθόνη (ή επιστρέφει σε "0"). */
+    /** 
+ * Backspace → αφαιρεί τον τελευταίο χαρακτήρα από την οθόνη.
+ * Αν η οθόνη αδειάσει, επιστρέφει σε "0".
+ */
     @FXML private void onBackspace() {
         String t = getDisplay();
         if (t == null || t.equals("Error") || t.isEmpty()) {
