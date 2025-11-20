@@ -119,9 +119,10 @@ public class CalculatorController {
         setDisplay(t + ")");
     }
 
-  /**
-     +/- → αλλάζει πρόσημο.
-     */
+ /**
+ * Αυτή η μέθοδος αλλάζει το πρόσημο του τρέχοντος αριθμητικού token.
+ */
+
     @FXML private void onToggleSign() {
         String t = getDisplay();
         if ("Error".equals(t) || t.isEmpty() || t.equals("0")) {
