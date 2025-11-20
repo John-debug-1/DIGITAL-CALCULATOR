@@ -220,3 +220,62 @@ public class CalculatorController {
         Stage st = (Stage) display.getScene().getWindow();
         st.close();
     }
+ /** Αρχικοποίηση controller: ενημερώνει την ένδειξη μνήμης. */
+    @FXML private void initialize() { updateMemLabel(); }
+
+    // ---------------- Εργαλεία parser / evaluator (για προτεραιότητα πράξεων, σωστή λειτουργία παρενθέσεων και λειτουργία δυνάμεων ----------------
+
+    private char lastChar(String s) { return s.charAt(s.length()-1); }
+
+    private boolean isOpChar(char c) {
+        return c=='+' || c=='-' || c=='*' || c=='/' || c=='^';
+    }
+
+    private String normalizeExpr(String s) {
+        return s.replace('×','*').replace('÷','/').replace('−','-')
+                .replaceAll("\\s+",""); // χωρίς κενά
+    }
+    /**
+     * Χαρτογραφεί το κείμενο κουμπιών
+     */
+    private String normalizeOp(String sign) {
+        return switch (sign) {
+            case "＋", "+" -> "+";
+            case "−", "-" -> "-";
+            case "×", "x", "*" -> "*";
+            case "÷", "/" -> "/";
+            case "^" -> "^";
+            default -> sign;
+        };
+    }
+    private BigDecimal evaluate(String expr) {
+        String s = normalizeExpr(expr);
+        if (s.isEmpty() || s.equals("-")) return BigDecimal.ZERO; // Κενή ή μόνο "-" -> 0
+        List<String> rpn = toRPN(tokenize(s));
+        return evalRPN(rpn);
+    }
+
+    /**
+     * Χωρίζει μια έκφραση σε tokens (αριθμοί, παρενθέσεις, τελεστές, unary "-").
+     */
+    private List<String> tokenize(String s) {
+        List<String> tokens = new ArrayList<>();
+        int i = 0;
+        String prev = null;
+        while (i < s.length()) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c) || c=='.') {
+                int j = i+1;
+                while (j < s.length() && (Character.isDigit(s.charAt(j)) || s.charAt(j)=='.')) j++;
+                tokens.add(s.substring(i,j));
+                prev = "num";
+                i = j;
+            } else if (c=='(' || c==')') {
+                tokens.add(String.valueOf(c));
+                prev = String.valueOf(c);
+                i++;
+            } else if (isOpChar(c)) {
+                if (c=='-' && (prev==null || "op".equals(prev) || "(".equals(prev))) {
+                    tokens.add("u-");
+                } else {
+                    tokens.add(String.valueOf(c));
