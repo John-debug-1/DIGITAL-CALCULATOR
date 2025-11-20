@@ -280,4 +280,3 @@ public class CalculatorController {
                 } else {
                     tokens.add(String.valueOf(c));
 
-τρεςγυφγφτευφυςυτφευςτφυφςτυ
