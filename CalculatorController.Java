@@ -88,7 +88,7 @@ public class CalculatorController {
     }
 
     /**
-     *  Τελεστές (, −, ×, ÷, ^) → μπαίνουν στο input.
+     *  Τελεστές (+, −, ×, ÷, ^) → μπαίνουν στο input.
      * Αν ήδη τελειώνει σε τελεστή, τον αντικαθιστά.
      */
     @FXML private void onOp(javafx.event.ActionEvent e) {
