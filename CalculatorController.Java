@@ -66,7 +66,7 @@ public class CalculatorController {
 
  /**
      * '.' → προσθέτει δεκαδικό στο τρέχον αριθμητικό token (μία φορά ανά token).
-     * Αν δεν υπάρχει κάτι, ξεκινά "0.".
+     * Αν δεν υπάρχει κάτι, ξεκινά ".".
      */
     @FXML private void onDot() {
         String t = getDisplay();
