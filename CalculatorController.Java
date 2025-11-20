@@ -124,7 +124,7 @@ public class CalculatorController {
  */
 
     @FXML private void onToggleSign() {
-        String t = getDisplay();
+        String text = getDisplay();
         if ("Error".equals(t) || t.isEmpty() || t.equals("0")) {
             setDisplay("-");
             return;
