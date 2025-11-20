@@ -55,7 +55,7 @@ public class CalculatorController {
 
     /**
      * Ψηφία από 0 έως 9
-     * Όταν βγάζει "rror" ή "0", ξεκινάει νέο αριθμό
+     * Όταν βγάζει "Error" ή "0", ξεκινάει νέο αριθμό
      */
     @FXML private void onDigit(javafx.event.ActionEvent e) {
         String d = ((Button)e.getSource()).getText();
