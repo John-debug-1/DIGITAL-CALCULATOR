@@ -133,7 +133,7 @@ public class CalculatorController {
             BigDecimal val = new BigDecimal(t);
             show(val.negate());
             return;
-        } catch (Exception ignore) { /* not a pure number */ }
+        } catch (Exception ignore) {  /* Δεν είναι καθαρός αριθμός, άρα επεξεργασία token */  }
 
         int end = t.length()-1;
         while (end>=0 && Character.isWhitespace(t.charAt(end))) end--;
