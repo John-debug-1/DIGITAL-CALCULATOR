@@ -135,6 +135,7 @@ public class CalculatorController {
             return;
         } catch (Exception ignore) {  /* Δεν είναι καθαρός αριθμός, άρα επεξεργασία token */  }
 
+        
         int end = t.length()-1;
         while (end>=0 && Character.isWhitespace(t.charAt(end))) end--;
         if (end<0 || isOpChar(t.charAt(end)) || t.charAt(end)=='(') {
